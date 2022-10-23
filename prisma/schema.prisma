@@ -20,9 +20,22 @@ model User {
   @@map("users")
 }
 
+model Event{
+  id String @default(uuid()) @id
+  name String
+  description String
+  price Float
+  start_date String
+  end_date String
+  event_hour String
+  event_coodenate String
+
+  @@map("events")
+}
 
 
 
 
 
 
+ 
