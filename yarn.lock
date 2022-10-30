@@ -783,6 +783,11 @@
   "resolved" "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452.tgz"
   "version" "4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452"
 
+"@prisma/engines@4.5.0":
+  "integrity" "sha512-4t9ir2SbQQr/wMCNU4YpHWp5hU14J2m3wHUZnGJPpmBF8YtkisxyVyQsKd1e6FyLTaGq8LOLhm6VLYHKqKNm+g=="
+  "resolved" "https://registry.npmjs.org/@prisma/engines/-/engines-4.5.0.tgz"
+  "version" "4.5.0"
+
 "@sinclair/typebox@^0.24.1":
   "integrity" "sha512-J4Xw0xYK4h7eC34MNOPQi6IkNxGRck6n4VJpWDzXIFVTW8I/D43Gf+NfWz/v/7NHlzWOPd3+T4PJ4OqklQ2u7A=="
   "resolved" "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.24.47.tgz"
@@ -3758,6 +3763,13 @@
     "ansi-regex" "^5.0.1"
     "ansi-styles" "^5.0.0"
     "react-is" "^18.0.0"
+
+"prisma@*", "prisma@^4.5.0":
+  "integrity" "sha512-9Aeg4qiKlv9Wsjz4NO8k2CzRzlvS3A4FYVJ5+28sBBZ0eEwbiVOE/Jj7v6rZC1tFW2s4GSICQOAyuOjc6WsNew=="
+  "resolved" "https://registry.npmjs.org/prisma/-/prisma-4.5.0.tgz"
+  "version" "4.5.0"
+  dependencies:
+    "@prisma/engines" "4.5.0"
 
 "process-nextick-args@~2.0.0":
   "integrity" "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="
