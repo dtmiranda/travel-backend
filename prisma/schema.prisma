@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 //Create models
 
 model Island{
@@ -19,6 +18,7 @@ model Island{
   cities City[]  
 
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("islands")
 }
@@ -28,7 +28,7 @@ model City{
   id String @default(uuid()) @id
   name String
 
-  islandId String @unique
+  islandId String
   island Island @relation(fields: [islandId], references: [id])
   
   trails Trail[]
@@ -37,6 +37,7 @@ model City{
   hotels Hotel[]
 
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("cities")
 }
@@ -55,6 +56,7 @@ model Trail{
   city City @relation(fields: [cityId], references: [id])
 
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
   
   @@map("trails")
 }
@@ -78,6 +80,7 @@ model Event{
 
   
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("events")
 }
@@ -95,10 +98,12 @@ model Profile{
   //relation field
   countryId String @unique
   country Country @relation(fields: [countryId], references: [id])
+  
   userId String @unique
   user User @relation(fields: [userId], references: [id])
   
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("profiles")
 }
@@ -114,12 +119,11 @@ model Ticket{
   event Event @relation(fields: [eventId], references: [id])
   
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("tickets")
 
 }
-
-
 
 
 
@@ -129,14 +133,49 @@ model Restaurant{
   coordinate String
 
   thumbnails Thumbnail[]
+  plates Plate[]
 
   cityId String
   city City @relation(fields: [cityId], references: [id])
 
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("restaurants")
 
+}
+
+model Plate{
+  id String @id @default(uuid())
+  name String
+  decription String
+  price Decimal
+
+  photos Photo[]
+  restaurantId String
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("plates")
+
+}
+
+model Photo{
+  id String @id @default(uuid())
+  link String
+  
+  plateId String
+  plate Plate @relation(fields: [plateId], references: [id])
+
+  roomId String
+  room Room @relation(fields: [roomId], references: [id])
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("photos")
 }
 
 
@@ -152,6 +191,7 @@ model Hotel{
   city City @relation(fields: [cityId], references: [id])
 
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("hotels")
 }
@@ -168,6 +208,7 @@ model Thumbnail{
   hotel Hotel @relation(fields: [hotelId], references: [id])
   
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("thumbnails")
 }
@@ -179,11 +220,13 @@ model Room{
   occupied Boolean
   description String
   reservations Reservation[]
+  photos Photo[]
 
   hotelId String
   hotel Hotel @relation(fields: [hotelId], references: [id])
   
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("rooms")
 
@@ -200,8 +243,9 @@ model Reservation{
   room Room @relation(fields: [roomId], references: [id])
 
   create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
-  @@map("reservation")
+  @@map("reservations")
 }
 
 
@@ -212,19 +256,24 @@ model User {
   id        String   @default(uuid()) @id
   email     String  @unique 
   password  String
-  create_at DateTime @default(now())
   profile Profile?
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("users")
 }
-
-
 
 
 model Country{
   id String @id @default(uuid())
   name String
   profile Profile?
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("countries")
   
 }
 
