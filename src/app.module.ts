@@ -6,9 +6,10 @@ import { EventsModule } from './events/events.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { IslandsModule } from './islands/islands.module';
 import { CitiesModule } from './cities/cities.module';
+import { TrailsModule } from './trails/trails.module';
 
 @Module({
-  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule],
+  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule],
   controllers: [AppController],
   providers: [AppService],
 })
