@@ -1,15 +1,19 @@
 import { Prisma } from "@prisma/client";
+import { DecimalJsLike } from "@prisma/client/runtime";
 import { Timestamp } from "rxjs";
 
-export class CreateEventDto {
-    id: string;
+export class CreateEventDto implements Prisma.EventCreateInput{
+    id?: string;
     name: string;
     description: string;
-    price: number;
-    start_date: string;
-    end_date: string;
-    event_hour: string;
-    event_coodenate: string;
-    cityId: Prisma.TicketUncheckedCreateNestedManyWithoutEventInput;
-    create_at: Date
+    price: string | number | Prisma.Decimal | DecimalJsLike;
+    start_date: string | Date;
+    end_date: string | Date;
+    event_hour: string | Date;
+    event_coordenate: string;
+    tickets?: Prisma.TicketCreateNestedManyWithoutEventInput;
+    city: Prisma.CityCreateNestedOneWithoutEventsInput;
+    create_at?: string | Date;
+    update_at?: string | Date;
+    
 }

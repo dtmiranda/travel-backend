@@ -11,6 +11,7 @@ export class EventsService {
   create(createEventDto: CreateEventDto) {
     return this.prisma.event.create({
       data:{
+        //keep all createDto and replicate.
         ...createEventDto
       }
     });
@@ -31,7 +32,11 @@ export class EventsService {
   update(id: string, updateEventDto: UpdateEventDto) {
     return this.prisma.event.update({
       where:{ id },
-      data: updateEventDto
+      data: { 
+
+        ...updateEventDto 
+
+      }
     });
   }
 

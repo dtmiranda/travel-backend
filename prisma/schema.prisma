@@ -14,7 +14,7 @@ datasource db {
 
 model Island{
   id String @default(uuid()) @id
-  name String
+  name String @unique
   cities City[]  
 
   create_at DateTime @default(now())
@@ -26,7 +26,7 @@ model Island{
 
 model City{
   id String @default(uuid()) @id
-  name String
+  name String @unique
 
   islandId String
   island Island @relation(fields: [islandId], references: [id])
@@ -45,7 +45,7 @@ model City{
 
 model Trail{
   id String @default(uuid()) @id
-  name String
+  name String @unique
   description String
   start_coordinate String
   end_coordinate String
@@ -65,7 +65,7 @@ model Trail{
 
 model Event{
   id String @default(uuid()) @id
-  name String
+  name String @unique
   description String
   price Decimal
   start_date DateTime
@@ -129,7 +129,7 @@ model Ticket{
 
 model Restaurant{
   id String @id @default(uuid())
-  name String
+  name String @unique
   coordinate String
 
   thumbnails Thumbnail[]
@@ -147,7 +147,7 @@ model Restaurant{
 
 model Plate{
   id String @id @default(uuid())
-  name String
+  name String @unique
   decription String
   price Decimal
 
@@ -181,7 +181,7 @@ model Photo{
 
 model Hotel{
   id String @id @default(uuid())
-  name String 
+  name String @unique
   coordinate String
 
   thumbnails Thumbnail[]
@@ -267,7 +267,7 @@ model User {
 
 model Country{
   id String @id @default(uuid())
-  name String
+  name String @unique
   profile Profile?
 
   create_at DateTime @default(now())
