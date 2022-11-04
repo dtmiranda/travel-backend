@@ -1,6 +1,5 @@
 import { Prisma } from "@prisma/client";
 import { DecimalJsLike } from "@prisma/client/runtime";
-import { Timestamp } from "rxjs";
 
 export class CreateEventDto implements Prisma.EventCreateInput{
     id?: string;

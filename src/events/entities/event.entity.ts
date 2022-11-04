@@ -13,6 +13,5 @@ export class Event implements Prisma.EventUncheckedCreateInput{
     tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutEventInput;
     cityId: string;
     create_at?: string | Date;
-    
-    
+        
 }
