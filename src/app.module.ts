@@ -5,9 +5,10 @@ import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { IslandsModule } from './islands/islands.module';
+import { CitiesModule } from './cities/cities.module';
 
 @Module({
-  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule],
+  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule],
   controllers: [AppController],
   providers: [AppService],
 })
