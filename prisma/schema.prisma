@@ -132,7 +132,7 @@ model Restaurant{
   name String @unique
   coordinate String
 
-  thumbnails Thumbnail[]
+  thumbnails_restaurant ThumbnailRestaurant[]
   plates Plate[]
 
   cityId String
@@ -213,7 +213,7 @@ model Hotel{
   name String @unique
   coordinate String
 
-  thumbnails Thumbnail[]
+  thumbnails_hotels ThumbnailHotel[]
   rooms Room[]
 
   cityId String
@@ -230,16 +230,44 @@ model Thumbnail{
   id String @id @default(uuid())
   name String 
 
-  restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
-  
-  hotelId String
-  hotel Hotel @relation(fields: [hotelId], references: [id])
-  
+  thumbnails_hotels ThumbnailHotel[]
+  thumbnails_restaurant ThumbnailRestaurant[]  
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
   @@map("thumbnails")
+}
+
+model ThumbnailHotel{
+  id String @id @default(uuid())
+  
+  hotelId String
+  hotel Hotel @relation(fields: [hotelId], references: [id])
+
+  thumbnailId String
+  thumbnail Thumbnail @relation(fields: [thumbnailId], references: [id])
+  
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("thumbnails_hotels")
+
+}
+
+model ThumbnailRestaurant{
+  id String @id @default(uuid())
+  
+  restaurantId String
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+
+  thumbnailId String
+  thumbnail Thumbnail @relation(fields: [thumbnailId], references: [id])
+  
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("thumbnails_restaturant")
+
 }
 
 
