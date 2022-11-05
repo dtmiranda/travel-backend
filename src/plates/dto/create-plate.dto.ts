@@ -6,8 +6,9 @@ export class CreatePlateDto implements Prisma.PlateCreateInput{
   name: string;
   decription: string;
   price: string | number | Prisma.Decimal | DecimalJsLike;
-  photos?: Prisma.PhotoCreateNestedManyWithoutPlateInput;
+  photos_plates?: Prisma.PhotoPlateCreateNestedManyWithoutPlateInput;
   restaurant: Prisma.RestaurantCreateNestedOneWithoutPlatesInput;
   create_at?: string | Date;
   update_at?: string | Date;
+    
 }

@@ -10,9 +10,10 @@ import { TrailsModule } from './trails/trails.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { PlatesModule } from './plates/plates.module';
+import { PhotosModule } from './photos/photos.module';
 
 @Module({
-  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule, TicketsModule, RestaurantsModule, PlatesModule],
+  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule, TicketsModule, RestaurantsModule, PlatesModule, PhotosModule],
   controllers: [AppController],
   providers: [AppService],
 })
