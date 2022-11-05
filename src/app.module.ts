@@ -19,9 +19,10 @@ import { ThumbnailsHotelsModule } from './thumbnails_hotels/thumbnails_hotels.mo
 import { ThumbnailsRestaurantsModule } from './thumbnails_restaurants/thumbnails_restaurants.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { ReservationsModule } from './reservations/reservations.module';
+import { CountriesModule } from './countries/countries.module';
 
 @Module({
-  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule, TicketsModule, RestaurantsModule, PlatesModule, PhotosModule, PhotosPlatesModule, PhotosRoomsModule, HotelsModule, ThumbnailsModule, ThumbnailsHotelsModule, ThumbnailsRestaurantsModule, RoomsModule, ReservationsModule],
+  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule, TicketsModule, RestaurantsModule, PlatesModule, PhotosModule, PhotosPlatesModule, PhotosRoomsModule, HotelsModule, ThumbnailsModule, ThumbnailsHotelsModule, ThumbnailsRestaurantsModule, RoomsModule, ReservationsModule, CountriesModule],
   controllers: [AppController],
   providers: [AppService],
 })
