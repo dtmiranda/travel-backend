@@ -165,6 +165,8 @@ model Plate{
 model Photo{
   id String @id @default(uuid())
   link String
+  photos_plates PhotoPlate[]
+  photos_rooms PhotoRoom[]
 
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
@@ -172,17 +174,37 @@ model Photo{
   @@map("photos")
 }
 
+
+
 model PhotoPlate{
   id String @id @default(uuid())
-  link String
 
   plateId String
   plate Plate @relation(fields: [plateId], references: [id])
+
+  photoId String
+  photo Photo @relation(fields: [photoId], references: [id])
 
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
   @@map("photos_plates")
+}
+
+model PhotoRoom{
+  id String @id @default(uuid())
+
+  roomId String
+  room Room @relation(fields: [roomId], references: [id])
+
+  photoId String
+  photo Photo @relation(fields: [photoId], references: [id])
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("photos_rooms")
+
 }
 
 
@@ -227,6 +249,8 @@ model Room{
   occupied Boolean
   description String
   reservations Reservation[]
+
+  photos_rooms PhotoRoom[]
 
   hotelId String
   hotel Hotel @relation(fields: [hotelId], references: [id])
