@@ -11,9 +11,10 @@ import { TicketsModule } from './tickets/tickets.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { PlatesModule } from './plates/plates.module';
 import { PhotosModule } from './photos/photos.module';
+import { PhotosPlatesModule } from './photos_plates/photos_plates.module';
 
 @Module({
-  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule, TicketsModule, RestaurantsModule, PlatesModule, PhotosModule],
+  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule, TicketsModule, RestaurantsModule, PlatesModule, PhotosModule, PhotosPlatesModule],
   controllers: [AppController],
   providers: [AppService],
 })

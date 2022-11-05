@@ -179,9 +179,6 @@ model PhotoPlate{
   plateId String
   plate Plate @relation(fields: [plateId], references: [id])
 
-  roomId String
-  room Room @relation(fields: [roomId], references: [id])
-
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
@@ -230,7 +227,6 @@ model Room{
   occupied Boolean
   description String
   reservations Reservation[]
-  photos_plates PhotoPlate[]
 
   hotelId String
   hotel Hotel @relation(fields: [hotelId], references: [id])
