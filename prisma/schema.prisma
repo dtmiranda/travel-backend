@@ -151,7 +151,7 @@ model Plate{
   decription String
   price Decimal
 
-  photos Photo[]
+  photos_plates PhotoPlate[]
   restaurantId String
   restaurant Restaurant @relation(fields: [restaurantId], references: [id])
 
@@ -165,7 +165,17 @@ model Plate{
 model Photo{
   id String @id @default(uuid())
   link String
-  
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("photos")
+}
+
+model PhotoPlate{
+  id String @id @default(uuid())
+  link String
+
   plateId String
   plate Plate @relation(fields: [plateId], references: [id])
 
@@ -175,7 +185,7 @@ model Photo{
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
-  @@map("photos")
+  @@map("photos_plates")
 }
 
 
@@ -220,7 +230,7 @@ model Room{
   occupied Boolean
   description String
   reservations Reservation[]
-  photos Photo[]
+  photos_plates PhotoPlate[]
 
   hotelId String
   hotel Hotel @relation(fields: [hotelId], references: [id])
