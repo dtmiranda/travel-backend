@@ -15,9 +15,10 @@ import { PhotosPlatesModule } from './photos_plates/photos_plates.module';
 import { PhotosRoomsModule } from './photos_rooms/photos_rooms.module';
 import { HotelsModule } from './hotels/hotels.module';
 import { ThumbnailsModule } from './thumbnails/thumbnails.module';
+import { ThumbnailsHotelsModule } from './thumbnails_hotels/thumbnails_hotels.module';
 
 @Module({
-  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule, TicketsModule, RestaurantsModule, PlatesModule, PhotosModule, PhotosPlatesModule, PhotosRoomsModule, HotelsModule, ThumbnailsModule],
+  imports: [UsersModule, EventsModule, ProfilesModule, IslandsModule, CitiesModule, TrailsModule, TicketsModule, RestaurantsModule, PlatesModule, PhotosModule, PhotosPlatesModule, PhotosRoomsModule, HotelsModule, ThumbnailsModule, ThumbnailsHotelsModule],
   controllers: [AppController],
   providers: [AppService],
 })
