@@ -15,7 +15,7 @@ datasource db {
 model Island{
   id String @default(uuid()) @id
   name String @unique
-  cities City[]  
+  cities City[] 
 
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
@@ -28,7 +28,7 @@ model City{
   id String @default(uuid()) @id
   name String @unique
 
-  islandId String
+  islandId String 
   island Island @relation(fields: [islandId], references: [id])
   
   trails Trail[]

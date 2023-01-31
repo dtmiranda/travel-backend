@@ -10,7 +10,7 @@ export class HotelsService {
 
   create(createHotelDto: CreateHotelDto) {
     return this.prisma.hotel.create({
-      data:{
+      data:{      
         ...createHotelDto
       }
     });
