@@ -12,337 +12,230 @@ datasource db {
 
 //Create models
 
-model Island{
-  id String @default(uuid()) @id
-  name String @unique
-  cities City[] 
-
+model Island {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  cities    City[]
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
   @@map("islands")
 }
 
-
-model City{
-  id String @default(uuid()) @id
-  name String @unique
-
-  islandId String 
-  island Island @relation(fields: [islandId], references: [id])
-  
-  trails Trail[]
-  events Event[]
+model City {
+  id          String       @id @default(uuid())
+  name        String       @unique
+  islandId    String
+  island      Island       @relation(fields: [islandId], references: [id])
+  trails      Trail[]
+  events      Event[]
+  profile     Profile[]
   restaurants Restaurant[]
-  hotels Hotel[]
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
+  hotels      Hotel[]
+  create_at   DateTime     @default(now())
+  update_at   DateTime     @updatedAt
 
   @@map("cities")
 }
 
-
-model Trail{
-  id String @default(uuid()) @id
-  name String @unique
-  description String
+model Trail {
+  id               String   @id @default(uuid())
+  name             String   @unique
+  description      String
+  length           Decimal
+  difficulty       String
+  duration         Decimal
+  elevation_gain   Decimal
   start_coordinate String
-  end_coordinate String
-  price Decimal
-  duration DateTime 
+  end_coordinate   String
+  terrain          String
+  views            String
+  price            Decimal
+  cityId           String
+  city             City     @relation(fields: [cityId], references: [id])
+  create_at        DateTime @default(now())
+  update_at        DateTime @updatedAt
 
-  cityId String
-  city City @relation(fields: [cityId], references: [id])
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-  
   @@map("trails")
 }
 
-
-
-model Event{
-  id String @default(uuid()) @id
-  name String @unique
+model Event {
+  id          String   @id @default(uuid())
+  title       String
   description String
-  price Decimal
-  start_date DateTime
-  end_date DateTime
-  event_hour DateTime
-  event_coordenate String
-
-  tickets Ticket[]
-
-  cityId String
-  city City @relation(fields: [cityId], references: [id])
-
-  
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
+  start_date  DateTime
+  end_date    DateTime
+  coordinate  String
+  organizer   String
+  attendees   Int
+  category    String
+  price       Decimal
+  tickets     Ticket[]
+  cityId      String
+  city        City     @relation(fields: [cityId], references: [id])
+  Review      Review[]
+  create_at   DateTime @default(now())
+  update_at   DateTime @updatedAt
 
   @@map("events")
 }
 
-
-model Profile{
-  id String @id @default(uuid())
-  bio String?
-  name String
-  surname String
-
-  tickets Ticket[]
+model Profile {
+  id           String        @id @default(uuid())
+  firstName    String
+  lastName     String
+  dateOfBirth  DateTime
+  phoneNumber  String
+  address      String
+  bio          String?
+  profilePic   String?
+  tickets      Ticket[]
   reservations Reservation[]
-
-  //relation field
-  countryId String @unique
-  country Country @relation(fields: [countryId], references: [id])
-  
-  userId String @unique
-  user User @relation(fields: [userId], references: [id])
-  
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
+  countryId    String        @unique
+  country      Country       @relation(fields: [countryId], references: [id])
+  cityId       String        @unique
+  city         City          @relation(fields: [cityId], references: [id])
+  userId       String        @unique
+  user         User          @relation(fields: [userId], references: [id])
+  Review       Review[]
+  create_at    DateTime      @default(now())
+  update_at    DateTime      @updatedAt
 
   @@map("profiles")
 }
 
-
-model Ticket{
-  id String @default(uuid()) @id
-
-  profileId String
-  profile Profile @relation(fields: [profileId], references: [id])
-  
-  eventId String
-  event Event @relation(fields: [eventId], references: [id])
-  
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("tickets")
-
-}
-
-
-
-model Restaurant{
-  id String @id @default(uuid())
-  name String @unique
-  coordinate String
-
-  thumbnails_restaurant ThumbnailRestaurant[]
-  plates Plate[]
-
-  cityId String
-  city City @relation(fields: [cityId], references: [id])
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("restaurants")
-
-}
-
-model Plate{
-  id String @id @default(uuid())
-  name String @unique
-  decription String
-  price Decimal
-
-  photos_plates PhotoPlate[]
-  restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("plates")
-
-}
-
-model Photo{
-  id String @id @default(uuid())
-  link String
-  photos_plates PhotoPlate[]
-  photos_rooms PhotoRoom[]
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("photos")
-}
-
-
-
-model PhotoPlate{
-  id String @id @default(uuid())
-
-  plateId String
-  plate Plate @relation(fields: [plateId], references: [id])
-
-  photoId String
-  photo Photo @relation(fields: [photoId], references: [id])
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("photos_plates")
-}
-
-model PhotoRoom{
-  id String @id @default(uuid())
-
-  roomId String
-  room Room @relation(fields: [roomId], references: [id])
-
-  photoId String
-  photo Photo @relation(fields: [photoId], references: [id])
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("photos_rooms")
-
-}
-
-
-model Hotel{
-  id String @id @default(uuid())
-  name String @unique
-  coordinate String
-
-  thumbnails_hotels ThumbnailHotel[]
-  rooms Room[]
-
-  cityId String
-  city City @relation(fields: [cityId], references: [id])
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("hotels")
-}
-
-
-model Thumbnail{
-  id String @id @default(uuid())
-  name String 
-
-  thumbnails_hotels ThumbnailHotel[]
-  thumbnails_restaurant ThumbnailRestaurant[]  
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("thumbnails")
-}
-
-model ThumbnailHotel{
-  id String @id @default(uuid())
-  
-  hotelId String
-  hotel Hotel @relation(fields: [hotelId], references: [id])
-
-  thumbnailId String
-  thumbnail Thumbnail @relation(fields: [thumbnailId], references: [id])
-  
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("thumbnails_hotels")
-
-}
-
-model ThumbnailRestaurant{
-  id String @id @default(uuid())
-  
-  restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
-
-  thumbnailId String
-  thumbnail Thumbnail @relation(fields: [thumbnailId], references: [id])
-  
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("thumbnails_restaturant")
-
-}
-
-
-model Room{
-  id String @id @default(uuid())
-  daily Decimal
-  occupied Boolean
-  description String
-  reservations Reservation[]
-
-  photos_rooms PhotoRoom[]
-
-  hotelId String
-  hotel Hotel @relation(fields: [hotelId], references: [id])
-  
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("rooms")
-
-}
-
-
-model Reservation{
-  id String @id @default(uuid())
-
-  profileId String
-  profile Profile @relation(fields: [profileId], references: [id])
-
-  roomId String
-  room Room @relation(fields: [roomId], references: [id])
-
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
-
-  @@map("reservations")
-}
-
-
-
-
-
 model User {
-  id        String   @default(uuid()) @id
-  email     String  @unique 
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String   @unique
   password  String
-  profile Profile?
-
+  profile   Profile?
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
   @@map("users")
 }
 
+model Ticket {
+  id           String   @id @default(uuid())
+  availability Int
+  profileId    String
+  profile      Profile  @relation(fields: [profileId], references: [id])
+  eventId      String
+  event        Event    @relation(fields: [eventId], references: [id])
+  create_at    DateTime @default(now())
+  update_at    DateTime @updatedAt
 
-model Country{
-  id String @id @default(uuid())
-  name String @unique
-  profile Profile?
+  @@map("tickets")
+}
 
+model Restaurant {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  address     String
+  whatsapp    String
+  email       String?
+  website     String?
+  rating      Int
+  amenities   String
+  coordinate  String
+  cuisine     String
+  menu        String
+  photos      Photo[]
+  cityId      String
+  city        City     @relation(fields: [cityId], references: [id])
+  Review      Review[]
+  create_at   DateTime @default(now())
+  update_at   DateTime @updatedAt
+
+  @@map("restaurants")
+}
+
+model Photo {
+  id         String       @id @default(uuid())
+  link       String
+  restaurant Restaurant[]
+  room       Room[]
+  hotel      Hotel[]
+  create_at  DateTime     @default(now())
+  update_at  DateTime     @updatedAt
+
+  @@map("photos")
+}
+
+model Room {
+  id           String        @id @default(uuid())
+  number       Int
+  type         String
+  description  String
+  amenities    String
+  rate         Decimal
+  capacity     Int
+  reservations Reservation[]
+  photos       Photo[]
+  hotelId      String
+  hotel        Hotel         @relation(fields: [hotelId], references: [id])
+  create_at    DateTime      @default(now())
+  update_at    DateTime      @updatedAt
+
+  @@map("rooms")
+}
+
+model Hotel {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  cityId    String
+  city      City     @relation(fields: [cityId], references: [id])
+  address   String
+  state     String
+  phone     String
+  email     String?
+  website   String?
+  rooms     Room[]
+  photos    Photo[]
+  Review    Review[]
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("hotels")
+}
+
+model Reservation {
+  id          String   @id @default(uuid())
+  start_date  DateTime
+  end_Date    DateTime
+  guest_count Int
+  total_price Decimal
+  profileId   String
+  profile     Profile  @relation(fields: [profileId], references: [id])
+  roomId      String
+  room        Room     @relation(fields: [roomId], references: [id])
+  create_at   DateTime @default(now())
+  update_at   DateTime @updatedAt
+
+  @@map("reservations")
+}
+
+model Country {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  profile   Profile?
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
   @@map("countries")
-  
 }
 
-
-
-
-
-
-
-
-
-
-
- 
+model Review {
+  id         String       @id @default(uuid())
+  comment    String
+  rating     Int
+  restaurant Restaurant[]
+  hotel      Hotel[]
+  event      Event[]
+  profileId  String
+  profile    Profile      @relation(fields: [profileId], references: [id])
+  create_at  DateTime     @default(now())
+  update_at  DateTime     @updatedAt
+}
