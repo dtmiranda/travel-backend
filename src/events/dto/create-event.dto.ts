@@ -1,18 +1,22 @@
 import { Prisma } from "@prisma/client";
 import { DecimalJsLike } from "@prisma/client/runtime";
 
-export class CreateEventDto implements Prisma.EventCreateInput{
+export class CreateEventDto implements Prisma.EventCreateInput {
     id?: string;
-    name: string;
+    title: string;
     description: string;
-    price: string | number | Prisma.Decimal | DecimalJsLike;
     start_date: string | Date;
     end_date: string | Date;
-    event_hour: string | Date;
-    event_coordenate: string;
+    coordinate: string;
+    organizer: string;
+    attendees: number;
+    category: string;
+    price: string | number | Prisma.Decimal | DecimalJsLike;
     tickets?: Prisma.TicketCreateNestedManyWithoutEventInput;
     city: Prisma.CityCreateNestedOneWithoutEventsInput;
+    Review?: Prisma.ReviewCreateNestedManyWithoutEventInput;
     create_at?: string | Date;
     update_at?: string | Date;
-    
+
+
 }
