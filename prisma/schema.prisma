@@ -116,6 +116,13 @@ model User {
   @@map("users")
 }
 
+model Auth {
+  id        String   @id @default(uuid())
+  email     String
+  password  String
+  create_at DateTime @default(now())
+}
+
 model Ticket {
   id           String   @id @default(uuid())
   availability Int
