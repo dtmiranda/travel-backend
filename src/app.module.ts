@@ -15,6 +15,7 @@ import { RoomsModule } from './rooms/rooms.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import { CountriesModule } from './countries/countries.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [UsersModule,
@@ -31,7 +32,8 @@ import { ReviewsModule } from './reviews/reviews.module';
     RoomsModule,
     ReservationsModule,
     CountriesModule,
-    ReviewsModule
+    ReviewsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
