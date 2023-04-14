@@ -5,7 +5,7 @@ import { UpdateIslandDto } from './dto/update-island.dto';
 
 @Controller('islands')
 export class IslandsController {
-  constructor(private readonly islandsService: IslandsService) {}
+  constructor(private readonly islandsService: IslandsService) { }
 
   @Post()
   create(@Body() createIslandDto: CreateIslandDto) {
