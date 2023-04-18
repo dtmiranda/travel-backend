@@ -13,7 +13,7 @@ import { LoginValidationMiddleware } from './middlewares/login-validation.middle
 @Module({
   imports: [UsersModule, PassportModule, JwtModule.register({
     secret: process.env.JWT_SECRET,
-    signOptions: { expiresIn: '1h' }
+    signOptions: { expiresIn: '1d' }
   })],
   controllers: [AuthController],
   providers: [AuthService, UsersService, PrismaService, JwtStrategy, LocalStrategy]
