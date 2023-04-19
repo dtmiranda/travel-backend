@@ -141,14 +141,14 @@ model Restaurant {
   name        String
   description String
   address     String
-  whatsapp    String
+  whatsapp    String?
   email       String?
   website     String?
-  rating      Int
-  amenities   String
-  coordinate  String
-  cuisine     String
-  menu        String
+  rating      Int?
+  amenities   String?
+  coordinate  String?
+  cuisine     String?
+  menu        String?
   photos      Photo[]
   cityId      String
   city        City     @relation(fields: [cityId], references: [id])
