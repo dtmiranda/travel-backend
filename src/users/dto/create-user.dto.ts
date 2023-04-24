@@ -3,11 +3,8 @@ import { Prisma } from '@prisma/client';
 import { IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
 export class CreateUserDto implements Prisma.UserCreateInput {
+    
     id?: string;
-
-    @IsNotEmpty()
-    @IsString()
-    username: string;
 
     @IsEmail()
     @IsString()
