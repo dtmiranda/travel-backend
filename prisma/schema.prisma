@@ -106,7 +106,6 @@ model Profile {
 
 model User {
   id        String   @id @default(uuid())
-  username  String   @unique
   email     String   @unique
   password  String
   profile   Profile?
@@ -121,6 +120,9 @@ model Auth {
   email     String
   password  String
   create_at DateTime @default(now())
+
+  @@map("auths")
+
 }
 
 model Ticket {
@@ -245,4 +247,7 @@ model Review {
   profile    Profile      @relation(fields: [profileId], references: [id])
   create_at  DateTime     @default(now())
   update_at  DateTime     @updatedAt
+
+  @@map("reviews")
+
 }
