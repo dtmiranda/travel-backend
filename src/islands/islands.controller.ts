@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { IslandsService } from './islands.service';
 import { CreateIslandDto } from './dto/create-island.dto';
 import { UpdateIslandDto } from './dto/update-island.dto';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('islands')
 export class IslandsController {
@@ -12,6 +13,7 @@ export class IslandsController {
     return this.islandsService.create(createIslandDto);
   }
 
+  @IsPublic()
   @Get()
   findAll() {
     return this.islandsService.findAll();
