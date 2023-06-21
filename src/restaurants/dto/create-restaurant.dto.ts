@@ -2,6 +2,7 @@ import { Prisma } from "@prisma/client";
 import { IsArray, IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class CreateRestaurantDto implements Prisma.RestaurantUncheckedCreateInput {
+
   id?: string;
 
   @IsNotEmpty()
@@ -26,9 +27,11 @@ export class CreateRestaurantDto implements Prisma.RestaurantUncheckedCreateInpu
   website?: string;
   rating: number;
 
-  @IsNotEmpty()
-  @IsString()
-  amenities: string;
+
+  latitude: string;
+  longitude: string;
+
+  amenities?: Prisma.AmenitiesUncheckedCreateNestedManyWithoutRestaurantInput;
 
   @IsNotEmpty()
   @IsString()
@@ -43,6 +46,11 @@ export class CreateRestaurantDto implements Prisma.RestaurantUncheckedCreateInpu
   @IsNotEmpty()
   @IsString()
   cityId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  userId: string;
+
   Review?: Prisma.ReviewCreateNestedManyWithoutRestaurantInput;
   create_at?: string | Date;
   update_at?: string | Date;

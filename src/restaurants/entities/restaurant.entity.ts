@@ -9,10 +9,13 @@ export class Restaurant implements Prisma.RestaurantUncheckedCreateInput {
   email?: string;
   website?: string;
   rating: number;
-  amenities: string;
   coordinate: string;
   cuisine: string;
   menu: string;
+  latitude: string;
+  longitude: string;
+  userId: string;
+  amenities?: Prisma.AmenitiesUncheckedCreateNestedManyWithoutRestaurantInput;
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutRestaurantInput;
   cityId: string;
   Review?: Prisma.ReviewUncheckedCreateNestedManyWithoutRestaurantInput;
