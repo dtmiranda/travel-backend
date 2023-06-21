@@ -19,6 +19,18 @@ export class CitiesService {
   findAll() {
     return this.prisma.city.findMany();
   }
+  
+
+  findCityFromIsland(islandId: string){
+
+    return this.prisma.city.findMany({
+     where:{
+      islandId : islandId
+     }
+
+    })
+    
+  }
 
   findOne(id: string) {
     return this.prisma.city.findUnique({
