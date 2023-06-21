@@ -105,12 +105,13 @@ model Profile {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  profile   Profile?
-  create_at DateTime @default(now())
-  update_at DateTime @updatedAt
+  id         String       @id @default(uuid())
+  email      String       @unique
+  password   String
+  Restaurant Restaurant[]
+  profile    Profile?
+  create_at  DateTime     @default(now())
+  update_at  DateTime     @updatedAt
 
   @@map("users")
 }
@@ -122,7 +123,6 @@ model Auth {
   create_at DateTime @default(now())
 
   @@map("auths")
-
 }
 
 model Ticket {
@@ -138,8 +138,20 @@ model Ticket {
   @@map("tickets")
 }
 
+model Amenities {
+  id         String       @id @default(uuid())
+  title      String
+  imageUrl   String
+  restaurant Restaurant[]
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  @@map("amenities")
+}
+
 model Restaurant {
-  id          String   @id @default(uuid())
+  id          String      @id @default(uuid())
   name        String
   description String
   address     String
@@ -147,16 +159,19 @@ model Restaurant {
   email       String?
   website     String?
   rating      Int?
-  amenities   String?
-  coordinate  String?
+  amenities   Amenities[]
+  latitude    String
+  longitude   String
   cuisine     String?
   menu        String?
   photos      Photo[]
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
   cityId      String
-  city        City     @relation(fields: [cityId], references: [id])
+  city        City        @relation(fields: [cityId], references: [id])
   Review      Review[]
-  create_at   DateTime @default(now())
-  update_at   DateTime @updatedAt
+  create_at   DateTime    @default(now())
+  update_at   DateTime    @updatedAt
 
   @@map("restaurants")
 }
@@ -249,5 +264,4 @@ model Review {
   update_at  DateTime     @updatedAt
 
   @@map("reviews")
-
 }
